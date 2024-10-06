@@ -18,7 +18,7 @@ const config: Config = {
   coverageDirectory: 'coverage',
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: ['src/**/*.ts'],
+  collectCoverageFrom: ['src/**/*.ts', '!src/planning/domain/valueobject/planning.ts'],
 
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns: ['/node_modules/', '/coverage/', '/dist/'],
