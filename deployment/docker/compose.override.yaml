@@ -1,0 +1,8 @@
+services:
+  composer:
+    profiles:
+      - tool
+
+  tests:
+    profiles:
+      - tool

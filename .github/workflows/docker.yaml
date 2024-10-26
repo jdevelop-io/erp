@@ -1,0 +1,35 @@
+name: Docker
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  php_build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php_version: [ 8.3 ]
+        composer_version: [ lts, latest ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build php image
+        run: |
+          docker buildx build \
+            --build-arg PHP_VERSION=${{ matrix.php_version }} \
+            --build-arg COMPOSER_VERSION=${{ matrix.composer_version }} \
+            --target development \
+            --tag php:${{ matrix.php_version }} \
+            --file deployment/docker/php/Dockerfile \
+            .

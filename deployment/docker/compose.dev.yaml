@@ -1,0 +1,42 @@
+services:
+  php:
+    env_file: ../../config/environments/.env.local
+    build:
+      context: ../../
+      dockerfile: deployment/docker/php/Dockerfile
+      target: development
+      args:
+        PHP_VERSION: ${PHP_VERSION:-8.3}
+        COMPOSER_VERSION: ${COMPOSER_VERSION:-lts}
+    working_dir: /app
+    volumes:
+      - ../../:/app
+      - ./php/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./php/config/phpunit.ini:/usr/local/etc/php/conf.d/phpunit.ini
+
+  composer:
+    extends:
+      service: php
+    entrypoint: composer
+    profiles:
+      - tool
+
+  tests:
+    extends:
+      service: composer
+    command: run test
+
+  phpcs:
+    extends:
+      service: composer
+    command: run phpcs
+
+  phpstan:
+    extends:
+      service: composer
+    command: run phpstan
+
+  phpmd:
+    extends:
+      service: composer
+    command: run phpmd
