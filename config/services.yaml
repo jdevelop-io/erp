@@ -17,3 +17,13 @@ services:
 
   JDevelop\Erp\Company\Domain\Repository\CompanyRepositoryInterface:
     class: JDevelop\Erp\Company\Infrastructure\Repository\DoctrineCompanyRepository
+
+  # Resource
+  JDevelop\Erp\Resource\:
+    resource: '../src/Resource/'
+
+  JDevelop\Erp\Resource\Domain\Repository\CompanyRepositoryInterface:
+    class: JDevelop\Erp\Resource\Infrastructure\Repository\DoctrineCompanyRepository
+
+  JDevelop\Erp\Resource\Domain\Repository\ResourceRepositoryInterface:
+    class: JDevelop\Erp\Resource\Infrastructure\Repository\DoctrineResourceRepository
