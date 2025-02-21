@@ -12,9 +12,9 @@ final class InMemoryResourceRepository implements ResourceRepositoryInterface
 {
     private iterable $resourceById = [];
 
-    public function findById(string $getResourceId): ?Resource
+    public function findById(string $id): ?Resource
     {
-        return $this->resourceById[$getResourceId] ?? null;
+        return $this->resourceById[$id] ?? null;
     }
 
     public function save(Resource $resource): void

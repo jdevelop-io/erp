@@ -112,4 +112,12 @@ final readonly class WorkScheduleConfiguration
             }
         }
     }
+
+    /**
+     * @return array<string, array>
+     */
+    public function toArray(): array
+    {
+        return $this->configuration;
+    }
 }

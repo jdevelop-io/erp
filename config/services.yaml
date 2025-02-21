@@ -27,3 +27,10 @@ services:
 
   JDevelop\Erp\Resource\Domain\Repository\ResourceRepositoryInterface:
     class: JDevelop\Erp\Resource\Infrastructure\Repository\DoctrineResourceRepository
+
+  # Availability
+  JDevelop\Erp\Availability\:
+    resource: '../src/Availability/'
+
+  JDevelop\Erp\Availability\Domain\Repository\ResourceRepositoryInterface:
+    class: JDevelop\Erp\Availability\Infrastructure\Repository\DoctrineResourceRepository

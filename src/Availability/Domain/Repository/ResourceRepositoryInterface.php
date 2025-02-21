@@ -8,5 +8,5 @@ use JDevelop\Erp\Availability\Domain\Entity\Resource;
 
 interface ResourceRepositoryInterface
 {
-    public function findById(string $getResourceId): ?Resource;
+    public function findById(string $id): ?Resource;
 }
