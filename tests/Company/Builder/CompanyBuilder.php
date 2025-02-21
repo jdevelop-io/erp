@@ -8,7 +8,7 @@ use JDevelop\Erp\Company\Domain\Entity\Company;
 use JDevelop\Erp\Company\Domain\ValueObject\RegistrationNumber;
 use JDevelop\Erp\Company\Domain\ValueObject\Siren;
 
-final readonly class CompanyBuilder
+final class CompanyBuilder
 {
     private RegistrationNumber $registrationNumber;
     private string $name;
