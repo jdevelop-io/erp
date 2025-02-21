@@ -206,6 +206,115 @@ final class DefineDefaultWorkScheduleServiceTest extends WorkScheduleTest
         );
     }
 
+    public function testOffDaysCannotHaveTimes(): void
+    {
+        $this->expectException(InvalidWorkScheduleException::class);
+
+        $this->service->execute(
+            new DefineDefaultWorkScheduleDto(
+                'ExistingResourceId', [
+                    'monday' => [
+                        'type' => 'work',
+                        'times' => [
+                            ['start' => '09:00', 'end' => '12:30'],
+                            ['start' => '14:00', 'end' => '17:00']
+                        ]
+                    ],
+                    'tuesday' => [
+                        'type' => 'work',
+                        'times' => [
+                            ['start' => '09:00', 'end' => '12:30'],
+                            ['start' => '14:00', 'end' => '17:00']
+                        ]
+                    ],
+                    'wednesday' => [
+                        'type' => 'work',
+                        'times' => [
+                            ['start' => '09:00', 'end' => '12:30'],
+                            ['start' => '14:00', 'end' => '17:00']
+                        ]
+                    ],
+                    'thursday' => [
+                        'type' => 'work',
+                        'times' => [
+                            ['start' => '09:00', 'end' => '12:30'],
+                            ['start' => '14:00', 'end' => '17:00']
+                        ]
+                    ],
+                    'friday' => [
+                        'type' => 'work',
+                        'times' => [
+                            ['start' => '09:00', 'end' => '12:30'],
+                            ['start' => '14:00', 'end' => '17:00']
+                        ]
+                    ],
+                    'saturday' => [
+                        'type' => 'off',
+                        'times' => [
+                            ['start' => '09:00', 'end' => '12:30']
+                        ]
+                    ],
+                    'sunday' => [
+                        'type' => 'off',
+                        'times' => []
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function testWorkDaysCannotHaveEmptyTimes(): void
+    {
+        $this->expectException(InvalidWorkScheduleException::class);
+
+        $this->service->execute(
+            new DefineDefaultWorkScheduleDto(
+                'ExistingResourceId', [
+                    'monday' => [
+                        'type' => 'work',
+                        'times' => []
+                    ],
+                    'tuesday' => [
+                        'type' => 'work',
+                        'times' => [
+                            ['start' => '09:00', 'end' => '12:30'],
+                            ['start' => '14:00', 'end' => '17:00']
+                        ]
+                    ],
+                    'wednesday' => [
+                        'type' => 'work',
+                        'times' => [
+                            ['start' => '09:00', 'end' => '12:30'],
+                            ['start' => '14:00', 'end' => '17:00']
+                        ]
+                    ],
+                    'thursday' => [
+                        'type' => 'work',
+                        'times' => [
+                            ['start' => '09:00', 'end' => '12:30'],
+                            ['start' => '14:00', 'end' => '17:00']
+                        ]
+                    ],
+                    'friday' => [
+                        'type' => 'work',
+                        'times' => [
+                            ['start' => '09:00', 'end' => '12:30'],
+                            ['start' => '14:00', 'end' => '17:00']
+                        ]
+                    ],
+                    'saturday' => [
+                        'type' => 'off',
+                        'times' => []
+                    ],
+                    'sunday' => [
+                        'type' => 'off',
+                        'times' => []
+                    ]
+                ]
+            )
+        );
+    }
+
     public function testWorkScheduleShouldBeDefined(): void
     {
         $workScheduleDefinedDto = $this->service->execute(
