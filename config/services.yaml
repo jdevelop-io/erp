@@ -21,3 +21,6 @@ services:
   # Resource
   JDevelop\Erp\Resource\:
     resource: '../src/Resource/'
+
+  JDevelop\Erp\Resource\Domain\Repository\CompanyRepositoryInterface:
+    class: JDevelop\Erp\Resource\Infrastructure\Repository\DoctrineCompanyRepository
