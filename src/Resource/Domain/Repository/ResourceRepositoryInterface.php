@@ -9,4 +9,6 @@ use JDevelop\Erp\Resource\Domain\Entity\Resource;
 interface ResourceRepositoryInterface
 {
     public function save(Resource $resource): void;
+
+    public function findById(string $id): ?Resource;
 }
