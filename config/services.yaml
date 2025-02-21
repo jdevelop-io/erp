@@ -5,7 +5,15 @@ services:
     autowire: true
     autoconfigure: true
 
+  # Shared
   JDevelop\Erp\Shared\:
     resource: '../src/Shared/'
     exclude:
       - '../src/Shared/Infrastructure/Symfony/Kernel.php'
+
+  # Company
+  JDevelop\Erp\Company\:
+    resource: '../src/Company/'
+
+  JDevelop\Erp\Company\Domain\Repository\CompanyRepositoryInterface:
+    class: JDevelop\Erp\Company\Infrastructure\Repository\DoctrineCompanyRepository
