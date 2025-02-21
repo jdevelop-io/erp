@@ -24,3 +24,6 @@ services:
 
   JDevelop\Erp\Resource\Domain\Repository\CompanyRepositoryInterface:
     class: JDevelop\Erp\Resource\Infrastructure\Repository\DoctrineCompanyRepository
+
+  JDevelop\Erp\Resource\Domain\Repository\ResourceRepositoryInterface:
+    class: JDevelop\Erp\Resource\Infrastructure\Repository\DoctrineResourceRepository
