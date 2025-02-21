@@ -18,7 +18,7 @@ final class Version20250221192939 extends AbstractMigration
     {
         $table = $schema->createTable('company_company');
         $table->addColumn('registration_number', 'string', ['length' => 9]);
-        $table->addColumn('name', 'string', ['length' => 255]);
+        $table->addColumn('name', 'string', ['length' => 45]);
         $table->setPrimaryKey(['registration_number']);
     }
 
