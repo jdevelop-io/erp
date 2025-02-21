@@ -14,3 +14,6 @@ services:
   # Company
   JDevelop\Erp\Company\:
     resource: '../src/Company/'
+
+  JDevelop\Erp\Company\Domain\Repository\CompanyRepositoryInterface:
+    class: JDevelop\Erp\Company\Infrastructure\Repository\DoctrineCompanyRepository
