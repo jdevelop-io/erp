@@ -1,0 +1,11 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  JDevelop\Erp\Shared\:
+    resource: '../src/Shared/'
+    exclude:
+      - '../src/Shared/Infrastructure/Symfony/Kernel.php'
