@@ -19,7 +19,7 @@ final class InMemoryWorkScheduleRepository implements WorkScheduleRepositoryInte
         $this->workScheduleById[$workSchedule->getResource()->getId()] = $workSchedule;
     }
 
-    public function findById(string $id): ?WorkSchedule
+    public function findByResourceId(string $id): ?WorkSchedule
     {
         return $this->workScheduleById[$id] ?? null;
     }

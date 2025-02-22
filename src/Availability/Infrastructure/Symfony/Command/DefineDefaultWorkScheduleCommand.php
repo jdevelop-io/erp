@@ -43,7 +43,7 @@ final class DefineDefaultWorkScheduleCommand extends Command
         $workScheduleDefinedDto = $this->defineDefaultWorkScheduleService->execute(
             new DefineDefaultWorkScheduleDto($resourceId, $configuration)
         );
-        $workSchedule = $this->workScheduleRepository->findById($workScheduleDefinedDto->getId());
+        $workSchedule = $this->workScheduleRepository->findByResourceId($workScheduleDefinedDto->getId());
 
         $io->table(
             ['Resource ID', 'Configuration'],
