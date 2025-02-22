@@ -26,4 +26,17 @@ final class InMemoryPublicHolidayRepository implements PublicHolidayRepositoryIn
     {
         return $this->publicHolidayByYear[$year] ?? [];
     }
+
+    public function findAllBetweenTwoDates(\DateTimeImmutable $startDate, \DateTimeImmutable $endDate): iterable
+    {
+        $publicHolidays = [];
+        foreach ($this->publicHolidayByYear as $publicHolidaysByYear) {
+            foreach ($publicHolidaysByYear as $publicHoliday) {
+                if ($publicHoliday->getDate() >= $startDate && $publicHoliday->getDate() <= $endDate) {
+                    $publicHolidays[] = $publicHoliday;
+                }
+            }
+        }
+        return $publicHolidays;
+    }
 }

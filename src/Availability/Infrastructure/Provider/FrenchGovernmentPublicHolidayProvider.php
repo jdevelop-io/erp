@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace JDevelop\Erp\Availability\Infrastructure\Provider;
 
+use DateInterval;
+use DatePeriod;
 use DateTimeImmutable;
 use JDevelop\Erp\Availability\Domain\Entity\PublicHoliday;
 use JDevelop\Erp\Availability\Domain\Repository\PublicHolidayRepositoryInterface;
@@ -43,6 +45,30 @@ final readonly class FrenchGovernmentPublicHolidayProvider implements PublicHoli
             $this->save($publicHoliday);
 
             $publicHolidays[] = $publicHoliday;
+        }
+
+        return $publicHolidays;
+    }
+
+    public function findAllBetweenTwoDates(\DateTimeImmutable $startDate, \DateTimeImmutable $endDate): iterable
+    {
+        $publicHolidays = $this->decorated->findAllBetweenTwoDates($startDate, $endDate);
+        if (!empty($publicHolidays)) {
+            return $publicHolidays;
+        }
+
+        $interval = new DateInterval('P1Y');
+        $period = new DatePeriod($startDate, $interval, $endDate->modify('+1 day'));
+
+        $publicHolidays = [];
+        foreach ($period as $date) {
+            $publicHolidaysForYear = $this->findByYear((int)$date->format('Y'));
+
+            foreach ($publicHolidaysForYear as $publicHoliday) {
+                if ($publicHoliday->getDate() >= $startDate && $publicHoliday->getDate() <= $endDate) {
+                    $publicHolidays[] = $publicHoliday;
+                }
+            }
         }
 
         return $publicHolidays;

@@ -54,10 +54,11 @@ abstract class WorkScheduleTest extends TestCase
         $this->workScheduleRepository->save($workSchedule);
     }
 
-    protected function createPublicHoliday(string $date): void
+    protected function createPublicHoliday(string $date, string $label): void
     {
         $publicHoliday = $this->publicHolidayBuilder
             ->withDate($date)
+            ->withLabel($label)
             ->build();
 
         $this->publicHolidayRepository->save($publicHoliday);

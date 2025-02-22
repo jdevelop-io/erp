@@ -13,5 +13,10 @@ interface PublicHolidayRepositoryInterface
      */
     public function findByYear(int $year): iterable;
 
+    /**
+     * @return iterable<PublicHoliday>
+     */
+    public function findAllBetweenTwoDates(\DateTimeImmutable $startDate, \DateTimeImmutable $endDate): iterable;
+
     public function save(PublicHoliday $publicHoliday): void;
 }
