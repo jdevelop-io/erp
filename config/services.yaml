@@ -34,3 +34,9 @@ services:
 
   JDevelop\Erp\Availability\Domain\Repository\ResourceRepositoryInterface:
     class: JDevelop\Erp\Availability\Infrastructure\Repository\DoctrineResourceRepository
+
+  JDevelop\Erp\Availability\Domain\Repository\WorkScheduleRepositoryInterface:
+    class: JDevelop\Erp\Availability\Infrastructure\Repository\DoctrineWorkScheduleRepository
+
+  JDevelop\Erp\Availability\Domain\Repository\PublicHolidayRepositoryInterface:
+    class: JDevelop\Erp\Availability\Infrastructure\Repository\InMemoryPublicHolidayRepository

@@ -29,8 +29,10 @@ final readonly class WorkScheduleConfiguration
         // All days of the week should be present
         $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
         foreach ($days as $day) {
-            if (!array_key_exists($day, $configuration)) {
-                throw new InvalidWorkScheduleException("Day $day is missing");
+            if (!isset($configuration[$day])) {
+                throw new InvalidWorkScheduleException(
+                    "Day $day is missing: " . json_encode(array_keys($configuration))
+                );
             }
         }
 

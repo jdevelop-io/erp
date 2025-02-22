@@ -8,7 +8,7 @@ use DateTimeImmutable;
 
 final readonly class PublicHoliday
 {
-    public function __construct(private DateTimeImmutable $date)
+    public function __construct(private DateTimeImmutable $date, private string $label)
     {
     }
 
@@ -20,5 +20,10 @@ final readonly class PublicHoliday
     public function getYear(): int
     {
         return (int)$this->date->format('Y');
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label;
     }
 }

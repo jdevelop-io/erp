@@ -12,4 +12,6 @@ interface PublicHolidayRepositoryInterface
      * @return iterable<PublicHoliday>
      */
     public function findByYear(int $year): iterable;
+
+    public function save(PublicHoliday $publicHoliday): void;
 }
