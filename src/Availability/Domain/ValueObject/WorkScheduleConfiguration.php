@@ -120,4 +120,20 @@ final readonly class WorkScheduleConfiguration
     {
         return $this->configuration;
     }
+
+    /**
+     * @return iterable<WorkDay>
+     */
+    public function getWorkingDays(): iterable
+    {
+        return array_map(
+            fn(string $day) => WorkDay::from($day),
+            array_keys(
+                array_filter(
+                    $this->configuration,
+                    fn(array $dayConfiguration) => $dayConfiguration['type'] === 'work'
+                )
+            )
+        );
+    }
 }

@@ -10,5 +10,5 @@ interface WorkScheduleRepositoryInterface
 {
     public function save(WorkSchedule $workSchedule): void;
 
-    public function findById(string $id): ?WorkSchedule;
+    public function findByResourceId(string $resourceId): ?WorkSchedule;
 }
