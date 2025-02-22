@@ -21,7 +21,7 @@ final readonly class GetMonthlyWorkScheduleProjectionService
     }
 
     public function execute(
-        GetMonthlyWorkScheduleProjectDto $getMonthlyWorkScheduleProjectDto
+        GetMonthlyWorkScheduleProjectionDto $getMonthlyWorkScheduleProjectDto
     ): MonthlyWorkScheduleProjectionDto {
         $resource = $this->resourceRepository->findById($getMonthlyWorkScheduleProjectDto->getResourceId());
         if ($resource === null) {

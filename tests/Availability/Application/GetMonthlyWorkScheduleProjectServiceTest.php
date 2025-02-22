@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JDevelop\Erp\Tests\Availability\Application;
 
-use JDevelop\Erp\Availability\Application\GetMonthlyWorkScheduleProjection\GetMonthlyWorkScheduleProjectDto;
+use JDevelop\Erp\Availability\Application\GetMonthlyWorkScheduleProjection\GetMonthlyWorkScheduleProjectionDto;
 use JDevelop\Erp\Availability\Application\GetMonthlyWorkScheduleProjection\GetMonthlyWorkScheduleProjectionService;
 use JDevelop\Erp\Availability\Domain\Exception\ResourceNotFoundException;
 use JDevelop\Erp\Availability\Domain\Exception\WorkScheduleNotFoundException;
@@ -85,7 +85,7 @@ final class GetMonthlyWorkScheduleProjectServiceTest extends WorkScheduleTest
     {
         $this->expectException(ResourceNotFoundException::class);
 
-        $this->service->execute(new GetMonthlyWorkScheduleProjectDto('InvalidResourceId', '2025-03'));
+        $this->service->execute(new GetMonthlyWorkScheduleProjectionDto('InvalidResourceId', '2025-03'));
     }
 
     public function testWorkScheduleShouldExists(): void
@@ -93,13 +93,13 @@ final class GetMonthlyWorkScheduleProjectServiceTest extends WorkScheduleTest
         $this->expectException(WorkScheduleNotFoundException::class);
 
         $this->service->execute(
-            new GetMonthlyWorkScheduleProjectDto('ExistingResourceIdWithoutWorkSchedule', '2025-03')
+            new GetMonthlyWorkScheduleProjectionDto('ExistingResourceIdWithoutWorkSchedule', '2025-03')
         );
     }
 
     public function testProjectionFor2025MarchShouldBe21(): void
     {
-        $projection = $this->service->execute(new GetMonthlyWorkScheduleProjectDto('ExistingResourceId', '2025-03'));
+        $projection = $this->service->execute(new GetMonthlyWorkScheduleProjectionDto('ExistingResourceId', '2025-03'));
 
         $this->assertCount(21, $projection->getDates());
     }
@@ -111,7 +111,7 @@ final class GetMonthlyWorkScheduleProjectServiceTest extends WorkScheduleTest
         $this->createPublicHoliday('2025-05-25', "Mother's Day");
         $this->createPublicHoliday('2025-05-29', 'Ascension Day');
 
-        $projection = $this->service->execute(new GetMonthlyWorkScheduleProjectDto('ExistingResourceId', '2025-05'));
+        $projection = $this->service->execute(new GetMonthlyWorkScheduleProjectionDto('ExistingResourceId', '2025-05'));
 
         $this->assertCount(19, $projection->getDates());
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JDevelop\Erp\Availability\Application\GetMonthlyWorkScheduleProjection;
 
-final readonly class GetMonthlyWorkScheduleProjectDto
+final readonly class GetMonthlyWorkScheduleProjectionDto
 {
     public function __construct(private string $resourceId, private string $month)
     {
