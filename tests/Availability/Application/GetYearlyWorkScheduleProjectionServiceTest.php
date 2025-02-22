@@ -125,8 +125,8 @@ final class GetYearlyWorkScheduleProjectionServiceTest extends WorkScheduleTest
 
     public function testProjectionFor2025ShouldNotIncludePublicHolidays(): void
     {
-        $this->createPublicHoliday('2025-01-01');
-        $this->createPublicHoliday('2025-12-25');
+        $this->createPublicHoliday('2025-01-01', 'New Year');
+        $this->createPublicHoliday('2025-12-25', 'Christmas');
 
         $projection = $this->service->execute(new GetYearlyWorkScheduleProjectionDto('ExistingResourceId', 2025));
 

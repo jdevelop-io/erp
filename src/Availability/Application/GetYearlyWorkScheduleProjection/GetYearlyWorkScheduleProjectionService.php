@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace JDevelop\Erp\Availability\Application\GetYearlyWorkScheduleProjection;
 
+use DateTimeImmutable;
 use JDevelop\Erp\Availability\Domain\Exception\ResourceNotFoundException;
 use JDevelop\Erp\Availability\Domain\Exception\WorkScheduleNotFoundException;
 use JDevelop\Erp\Availability\Domain\Repository\ResourceRepositoryInterface;
 use JDevelop\Erp\Availability\Domain\Repository\WorkScheduleRepositoryInterface;
-use JDevelop\Erp\Availability\Domain\Service\YearlyWorkScheduleProjectionService;
+use JDevelop\Erp\Availability\Domain\Service\WorkScheduleProjectionService;
 
 final readonly class GetYearlyWorkScheduleProjectionService
 {
     public function __construct(
         private ResourceRepositoryInterface $resourceRepository,
         private WorkScheduleRepositoryInterface $workScheduleRepository,
-        private YearlyWorkScheduleProjectionService $yearlyWorkScheduleProjectionService
+        private WorkScheduleProjectionService $workScheduleProjectionService
     ) {
     }
 
@@ -34,9 +35,12 @@ final readonly class GetYearlyWorkScheduleProjectionService
         }
 
         $workingDays = $workSchedule->getConfiguration()->getWorkingDays();
-        $yearlyWorkScheduleProjectionDates = $this->yearlyWorkScheduleProjectionService->project(
+        $startDate = new DateTimeImmutable($getYearlyWorkScheduleProjectionDto->getYear() . '-01-01');
+        $endDate = new DateTimeImmutable($getYearlyWorkScheduleProjectionDto->getYear() . '-12-31');
+        $yearlyWorkScheduleProjectionDates = $this->workScheduleProjectionService->project(
+            $startDate,
+            $endDate,
             $workingDays,
-            $getYearlyWorkScheduleProjectionDto->getYear()
         );
 
         return new YearlyWorkScheduleProjectionDto(
