@@ -7,17 +7,29 @@ namespace JDevelop\Erp\Availability\Domain\Service;
 use DateInterval;
 use DatePeriod;
 use DateTimeImmutable;
+use JDevelop\Erp\Availability\Domain\Entity\PublicHoliday;
+use JDevelop\Erp\Availability\Domain\Repository\PublicHolidayRepositoryInterface;
 use JDevelop\Erp\Availability\Domain\ValueObject\WorkDay;
 
 final readonly class YearlyWorkScheduleProjectionService
 {
+    public function __construct(private PublicHolidayRepositoryInterface $publicHolidayRepository)
+    {
+    }
 
     /**
      * @param iterable<WorkDay> $workingDays
      * @return iterable<DateTimeImmutable>
      */
-    public function project(iterable $workingDays, int $year): iterable
+    public function project(iterable $workingDays, int $year, bool $includePublicHolidays = true): iterable
     {
+        $publicHolidays = $includePublicHolidays
+            ? array_map(
+                fn(PublicHoliday $publicHoliday) => $publicHoliday->getDate()->format('Y-m-d'),
+                iterator_to_array($this->publicHolidayRepository->findByYear($year))
+            )
+            : [];
+
         $startDate = new DateTimeImmutable("$year-01-01");
         $endDate = new DateTimeImmutable("$year-12-31");
         $interval = new DateInterval('P1D');
@@ -25,6 +37,9 @@ final readonly class YearlyWorkScheduleProjectionService
 
         $workableDays = [];
         foreach ($period as $date) {
+            if (in_array($date->format('Y-m-d'), $publicHolidays, true)) {
+                continue;
+            }
             $day = mb_strtolower($date->format('l'));
             if (in_array(
                 $day,

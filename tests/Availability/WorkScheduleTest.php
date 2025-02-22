@@ -7,6 +7,7 @@ namespace JDevelop\Erp\Tests\Availability;
 use JDevelop\Erp\Availability\Infrastructure\Repository\InMemoryPublicHolidayRepository;
 use JDevelop\Erp\Availability\Infrastructure\Repository\InMemoryResourceRepository;
 use JDevelop\Erp\Availability\Infrastructure\Repository\InMemoryWorkScheduleRepository;
+use JDevelop\Erp\Tests\Availability\Builder\PublicHolidayBuilder;
 use JDevelop\Erp\Tests\Availability\Builder\ResourceBuilder;
 use JDevelop\Erp\Tests\Availability\Builder\WorkScheduleBuilder;
 use PHPUnit\Framework\TestCase;
@@ -15,8 +16,10 @@ abstract class WorkScheduleTest extends TestCase
 {
     protected readonly InMemoryResourceRepository $resourceRepository;
     protected readonly InMemoryWorkScheduleRepository $workScheduleRepository;
+    protected readonly InMemoryPublicHolidayRepository $publicHolidayRepository;
     private readonly ResourceBuilder $resourceBuilder;
     private readonly WorkScheduleBuilder $workScheduleBuilder;
+    private readonly PublicHolidayBuilder $publicHolidayBuilder;
 
     protected function setUp(): void
     {
@@ -24,8 +27,10 @@ abstract class WorkScheduleTest extends TestCase
 
         $this->resourceRepository = new InMemoryResourceRepository();
         $this->workScheduleRepository = new InMemoryWorkScheduleRepository();
+        $this->publicHolidayRepository = new InMemoryPublicHolidayRepository();
         $this->resourceBuilder = new ResourceBuilder();
         $this->workScheduleBuilder = new WorkScheduleBuilder();
+        $this->publicHolidayBuilder = new PublicHolidayBuilder();
     }
 
     protected function createResource(string $id): void
@@ -47,6 +52,15 @@ abstract class WorkScheduleTest extends TestCase
             ->build();
 
         $this->workScheduleRepository->save($workSchedule);
+    }
+
+    protected function createPublicHoliday(string $date): void
+    {
+        $publicHoliday = $this->publicHolidayBuilder
+            ->withDate($date)
+            ->build();
+
+        $this->publicHolidayRepository->save($publicHoliday);
     }
 
     protected function assertWorkScheduleShouldBeDefined(string $id): void

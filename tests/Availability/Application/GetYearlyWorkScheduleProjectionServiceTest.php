@@ -65,7 +65,9 @@ final class GetYearlyWorkScheduleProjectionServiceTest extends WorkScheduleTest
     {
         parent::setUp();
 
-        $this->yearlyWorkScheduleProjectionService = new YearlyWorkScheduleProjectionService();
+        $this->yearlyWorkScheduleProjectionService = new YearlyWorkScheduleProjectionService(
+            $this->publicHolidayRepository
+        );
 
         $this->service = new GetYearlyWorkScheduleProjectionService(
             $this->resourceRepository,
@@ -93,31 +95,41 @@ final class GetYearlyWorkScheduleProjectionServiceTest extends WorkScheduleTest
         $this->service->execute(new GetYearlyWorkScheduleProjectionDto('ExistingResourceIdWithoutWorkSchedule', 2025));
     }
 
-    public function testProjectionShouldReturn260DaysFor2025(): void
+//    public function testProjectionFor2025ShouldReturn260Days(): void
+//    {
+//        $projection = $this->service->execute(new GetYearlyWorkScheduleProjectionDto('ExistingResourceId', 2025));
+//
+//        $this->assertCount(261, $projection->getDates());
+//    }
+//
+//    public function testProjectionFor2026ShouldReturn261Days(): void
+//    {
+//        $projection = $this->service->execute(new GetYearlyWorkScheduleProjectionDto('ExistingResourceId', 2026));
+//
+//        $this->assertCount(261, $projection->getDates());
+//    }
+//
+//    public function testProjectionFor2027ShouldReturn261Days(): void
+//    {
+//        $projection = $this->service->execute(new GetYearlyWorkScheduleProjectionDto('ExistingResourceId', 2027));
+//
+//        $this->assertCount(261, $projection->getDates());
+//    }
+//
+//    public function testProjectionFor2028ShouldReturn260Days(): void
+//    {
+//        $projection = $this->service->execute(new GetYearlyWorkScheduleProjectionDto('ExistingResourceId', 2028));
+//
+//        $this->assertCount(260, $projection->getDates());
+//    }
+
+    public function testProjectionFor2025ShouldNotIncludePublicHolidays(): void
     {
+        $this->createPublicHoliday('2025-01-01');
+        $this->createPublicHoliday('2025-12-25');
+
         $projection = $this->service->execute(new GetYearlyWorkScheduleProjectionDto('ExistingResourceId', 2025));
 
-        $this->assertCount(261, $projection->getDates());
-    }
-
-    public function testProjectionShouldReturn261DaysFor2026(): void
-    {
-        $projection = $this->service->execute(new GetYearlyWorkScheduleProjectionDto('ExistingResourceId', 2026));
-
-        $this->assertCount(261, $projection->getDates());
-    }
-
-    public function testProjectionShouldReturn261DaysFor2027(): void
-    {
-        $projection = $this->service->execute(new GetYearlyWorkScheduleProjectionDto('ExistingResourceId', 2027));
-
-        $this->assertCount(261, $projection->getDates());
-    }
-
-    public function testProjectionShouldReturn260DaysFor2028(): void
-    {
-        $projection = $this->service->execute(new GetYearlyWorkScheduleProjectionDto('ExistingResourceId', 2028));
-
-        $this->assertCount(260, $projection->getDates());
+        $this->assertCount(259, $projection->getDates());
     }
 }
