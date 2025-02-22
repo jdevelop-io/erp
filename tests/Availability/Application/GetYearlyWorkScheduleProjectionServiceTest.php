@@ -8,7 +8,7 @@ use JDevelop\Erp\Availability\Application\GetYearlyWorkScheduleProjection\GetYea
 use JDevelop\Erp\Availability\Application\GetYearlyWorkScheduleProjection\GetYearlyWorkScheduleProjectionService;
 use JDevelop\Erp\Availability\Domain\Exception\ResourceNotFoundException;
 use JDevelop\Erp\Availability\Domain\Exception\WorkScheduleNotFoundException;
-use JDevelop\Erp\Availability\Domain\Service\YearlyWorkScheduleProjectionService;
+use JDevelop\Erp\Availability\Domain\Service\WorkScheduleProjectionService;
 use JDevelop\Erp\Tests\Availability\WorkScheduleTest;
 
 final class GetYearlyWorkScheduleProjectionServiceTest extends WorkScheduleTest
@@ -58,21 +58,21 @@ final class GetYearlyWorkScheduleProjectionServiceTest extends WorkScheduleTest
             'times' => []
         ]
     ];
-    private readonly YearlyWorkScheduleProjectionService $yearlyWorkScheduleProjectionService;
+    private readonly WorkScheduleProjectionService $workScheduleProjectionService;
     private readonly GetYearlyWorkScheduleProjectionService $service;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->yearlyWorkScheduleProjectionService = new YearlyWorkScheduleProjectionService(
+        $this->workScheduleProjectionService = new WorkScheduleProjectionService(
             $this->publicHolidayRepository
         );
 
         $this->service = new GetYearlyWorkScheduleProjectionService(
             $this->resourceRepository,
             $this->workScheduleRepository,
-            $this->yearlyWorkScheduleProjectionService
+            $this->workScheduleProjectionService
         );
 
         $this->createResource('ExistingResourceIdWithoutWorkSchedule');
