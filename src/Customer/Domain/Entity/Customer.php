@@ -11,6 +11,7 @@ final class Customer
     public function __construct(
         private readonly Company $company,
         private readonly RegistrationNumber $registrationNumber,
+        private readonly string $name,
         private ?string $id = null
     ) {
     }
@@ -23,6 +24,11 @@ final class Customer
     public function getRegistrationNumber(): RegistrationNumber
     {
         return $this->registrationNumber;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function setId(string $id): void

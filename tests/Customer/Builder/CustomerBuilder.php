@@ -13,6 +13,7 @@ final class CustomerBuilder
 {
     private Company $company;
     private RegistrationNumber $registrationNumber;
+    private string $name;
 
     public function withCompany(Company $company): self
     {
@@ -28,8 +29,15 @@ final class CustomerBuilder
         return $this;
     }
 
+    public function withName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     public function build(): Customer
     {
-        return new Customer($this->company, $this->registrationNumber);
+        return new Customer($this->company, $this->registrationNumber, $this->name);
     }
 }

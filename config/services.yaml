@@ -40,3 +40,10 @@ services:
 
   JDevelop\Erp\Availability\Domain\Repository\PublicHolidayRepositoryInterface:
     class: JDevelop\Erp\Availability\Infrastructure\Repository\InMemoryPublicHolidayRepository
+
+  # Customer
+  JDevelop\Erp\Customer\:
+    resource: '../src/Customer/'
+
+  JDevelop\Erp\Customer\Domain\Repository\CompanyRepositoryInterface:
+    class: JDevelop\Erp\Customer\Infrastructure\Repository\DoctrineCompanyRepository

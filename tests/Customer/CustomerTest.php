@@ -36,23 +36,25 @@ abstract class CustomerTest extends TestCase
         $this->companyRepository->save($company);
     }
 
-    protected function createCustomer(string $companyId, string $registrationNumber): void
+    protected function createCustomer(string $companyId, string $registrationNumber, string $name): void
     {
         $company = $this->companyRepository->findById($companyId);
 
         $customer = $this->customerBuilder
             ->withCompany($company)
             ->withRegistrationNumber($registrationNumber)
+            ->withName($name)
             ->build();
 
         $this->customerRepository->save($customer);
     }
 
-    protected function assertCustomerHasBeenRegistered(string $customerId, string $companyId): void
+    protected function assertCustomerHasBeenRegistered(string $customerId, string $companyId, string $name): void
     {
         $customer = $this->customerRepository->findById($customerId);
 
         $this->assertNotNull($customer);
         $this->assertSame($companyId, $customer->getCompany()->getId());
+        $this->assertSame($name, $customer->getName());
     }
 }

@@ -31,7 +31,8 @@ final readonly class RegisterCustomerService
             throw new CustomerAlreadyRegisteredException($registerCustomerDto->getRegistrationNumber());
         }
 
-        $customer = new Customer($company, $registrationNumber);
+        $name = $registerCustomerDto->getName();
+        $customer = new Customer($company, $registrationNumber, $name);
         $this->customerRepository->save($customer);
 
         return new CustomerRegisteredDto($customer->getId());

@@ -21,7 +21,7 @@ final class RegisterCustomerServiceTest extends CustomerTest
         $this->service = new RegisterCustomerService($this->companyRepository, $this->customerRepository);
 
         $this->createCompany('ExistingCompanyId');
-        $this->createCustomer('ExistingCompanyId', '123456789');
+        $this->createCustomer('ExistingCompanyId', '123456789', 'A Customer');
     }
 
     public function testCompanyShouldExists(): void
@@ -32,6 +32,7 @@ final class RegisterCustomerServiceTest extends CustomerTest
             new RegisterCustomerDto(
                 'InvalidCompanyId',
                 '123456789',
+                'A Customer',
             )
         );
     }
@@ -44,6 +45,7 @@ final class RegisterCustomerServiceTest extends CustomerTest
             new RegisterCustomerDto(
                 'ExistingCompanyId',
                 '123456789',
+                'A Customer',
             )
         );
     }
@@ -54,9 +56,10 @@ final class RegisterCustomerServiceTest extends CustomerTest
             new RegisterCustomerDto(
                 'ExistingCompanyId',
                 '987654321',
+                'A Customer',
             )
         );
 
-        $this->assertCustomerHasBeenRegistered($customerRegisteredDto->getId(), 'ExistingCompanyId');
+        $this->assertCustomerHasBeenRegistered($customerRegisteredDto->getId(), 'ExistingCompanyId', 'A Customer');
     }
 }

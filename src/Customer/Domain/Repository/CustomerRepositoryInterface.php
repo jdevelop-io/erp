@@ -13,4 +13,6 @@ interface CustomerRepositoryInterface
     public function save(Customer $customer): void;
 
     public function existsByRegistrationNumber(Company $company, RegistrationNumber $registrationNumber): bool;
+
+    public function findById(string $id): ?Customer;
 }

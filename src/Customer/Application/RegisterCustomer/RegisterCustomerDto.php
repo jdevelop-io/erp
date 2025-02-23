@@ -6,7 +6,7 @@ namespace JDevelop\Erp\Customer\Application\RegisterCustomer;
 
 final readonly class RegisterCustomerDto
 {
-    public function __construct(private string $companyId, private string $registrationNumber)
+    public function __construct(private string $companyId, private string $registrationNumber, private string $name)
     {
     }
 
@@ -18,5 +18,10 @@ final readonly class RegisterCustomerDto
     public function getRegistrationNumber(): string
     {
         return $this->registrationNumber;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }
