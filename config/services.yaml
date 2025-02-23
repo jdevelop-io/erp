@@ -57,3 +57,6 @@ services:
 
   JDevelop\Erp\Contract\Domain\Repository\CompanyRepositoryInterface:
     class: JDevelop\Erp\Contract\Infrastructure\Repository\DoctrineCompanyRepository
+
+  JDevelop\Erp\Contract\Domain\Repository\CustomerRepositoryInterface:
+    class: JDevelop\Erp\Contract\Infrastructure\Repository\DoctrineCustomerRepository
