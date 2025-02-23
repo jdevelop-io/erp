@@ -53,7 +53,8 @@ abstract class ContractTest extends TestCase
         string $companyId,
         string $customerId,
         string $beginDate,
-        string $endDate
+        string $endDate,
+        string $name,
     ): void {
         $contract = $this->contractRepository->findById($contractId);
 
@@ -62,5 +63,6 @@ abstract class ContractTest extends TestCase
         $this->assertEquals($customerId, $contract->getCustomer()->getId());
         $this->assertEquals($beginDate, $contract->getBeginDate()->unwrap()->format('Y-m-d'));
         $this->assertEquals($endDate, $contract->getEndDate()->unwrap()->format('Y-m-d'));
+        $this->assertEquals($name, $contract->getName());
     }
 }

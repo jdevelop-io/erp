@@ -10,7 +10,8 @@ final readonly class CreateContractDto
         private string $companyId,
         private string $customerId,
         private string $beginDate,
-        private string $endDate
+        private string $endDate,
+        private string $name,
     ) {
     }
 
@@ -32,5 +33,10 @@ final readonly class CreateContractDto
     public function getEndDate(): string
     {
         return $this->endDate;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

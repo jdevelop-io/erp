@@ -41,7 +41,8 @@ final readonly class CreateContractService
             throw new InvalidDatesSequenceException($beginDate, $endDate);
         }
 
-        $contract = new Contract($company, $customer, $beginDate, $endDate);
+        $name = $createContractDto->getName();
+        $contract = new Contract($company, $customer, $beginDate, $endDate, $name);
         $this->contractRepository->save($contract);
 
         return new ContractCreatedDto($contract->getId());

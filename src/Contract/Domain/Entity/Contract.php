@@ -13,6 +13,7 @@ final class Contract
         private readonly Customer $customer,
         private readonly ContractDate $beginDate,
         private readonly ContractDate $endDate,
+        private readonly string $name,
         private ?string $id = null
     ) {
     }
@@ -35,6 +36,11 @@ final class Contract
     public function getEndDate(): ContractDate
     {
         return $this->endDate;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function setId(string $id): void

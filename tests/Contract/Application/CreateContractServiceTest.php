@@ -39,6 +39,7 @@ final class CreateContractServiceTest extends ContractTest
                 'ExistingCustomerId',
                 '2025-02-23',
                 '2025-03-15',
+                'A contract',
             )
         );
     }
@@ -53,6 +54,7 @@ final class CreateContractServiceTest extends ContractTest
                 'InvalidCustomerId',
                 '2025-02-23',
                 '2025-03-15',
+                'A contract',
             )
         );
     }
@@ -67,6 +69,7 @@ final class CreateContractServiceTest extends ContractTest
                 'ExistingCustomerId',
                 '2025-03-15',
                 '2025-02-23',
+                'A contract',
             )
         );
     }
@@ -79,6 +82,7 @@ final class CreateContractServiceTest extends ContractTest
                 'ExistingCustomerId',
                 '2025-02-23',
                 '2025-03-15',
+                'A contract',
             )
         );
 
@@ -87,7 +91,8 @@ final class CreateContractServiceTest extends ContractTest
             'ExistingCompanyId',
             'ExistingCustomerId',
             '2025-02-23',
-            '2025-03-15'
+            '2025-03-15',
+            'A contract',
         );
     }
 }
