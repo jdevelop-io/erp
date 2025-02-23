@@ -60,3 +60,6 @@ services:
 
   JDevelop\Erp\Contract\Domain\Repository\CustomerRepositoryInterface:
     class: JDevelop\Erp\Contract\Infrastructure\Repository\DoctrineCustomerRepository
+
+  JDevelop\Erp\Contract\Domain\Repository\ContractRepositoryInterface:
+    class: JDevelop\Erp\Contract\Infrastructure\Repository\DoctrineContractRepository
