@@ -54,3 +54,6 @@ services:
   # Contract
   JDevelop\Erp\Contract\:
     resource: '../src/Contract/'
+
+  JDevelop\Erp\Contract\Domain\Repository\CompanyRepositoryInterface:
+    class: JDevelop\Erp\Contract\Infrastructure\Repository\DoctrineCompanyRepository
